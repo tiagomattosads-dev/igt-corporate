@@ -93,13 +93,26 @@ body {
     50% { transform: scaleY(-1) translateY(15px); } 
 }
 
-.loaderContainer {
+/* O grupo que vai receber o reflexo completo (Texto + Tracinhos) */
+.loaderGroup {
     display: flex;
     flex-direction: column;
     align-items: flex-end; 
     width: 100%;
     position: relative; 
-    -webkit-box-reflect: below 12px linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.0) 100%);
+    
+    /* O reflexo volta a pegar tudo aqui com 40% de opacidade! */
+    -webkit-box-reflect: below 12px linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.0) 100%);
+    z-index: 1;
+}
+
+.percentageContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 .percentageText {
@@ -108,11 +121,6 @@ body {
     font-weight: 500;
     margin-bottom: 15px;
     letter-spacing: 2px;
-    
-    /* O texto fica ali visualmente incrível, mas impossível de ser "sublinhado" de azul */
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
 }
 
 .ticksContainer {
@@ -132,16 +140,28 @@ body {
     will-change: transform, background-color;
 }
 
+/* O chão de vidro jateado solto por fora */
+/* O chão de vidro jateado solto por fora */
 .matteFloor {
     position: absolute;
     top: calc(100% + 12px); 
     left: -10vw; 
     width: 120vw;
-    height: 150px; 
-    z-index: 3;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    
+    /* 1. ESTICAMOS O VIDRO: De 120px para 300px para cobrir toda a porcentagem */
+    height: 500px; 
+    z-index: 5;
+    
+    background: rgba(8, 8, 8, 0.01); 
+    
+    
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     pointer-events: none;
+    
+    /* 2. A MÁGICA FINAL: Faz o desfoque desaparecer suavemente em degradê, matando o corte seco! */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
 }
 
 .welcomeScreen {
