@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="image/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <title>IGT Corporate</title>
+</head>
+
+<body>
+
+    <div id="preloader">
+        <div class="preloaderContent">
+            <div class="logoWrapper">
+                <img src="image/favicon.svg" class="logoIgt mainLogo" alt="Logo IGT">
+                <img src="image/favicon.svg" class="logoIgt reflectionLogo" alt="">
+            </div>
+            <div class="loaderContainer">
+                <div class="percentageText">0%</div>
+                <div class="ticksContainer"></div>
+                <div class="matteFloor"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="welcomeScreen" style="display: none;">
+        <h1 class="welcomeTitle">Bem-vindo a IGT Corporate</h1>
+    </div>
+
+    <div class="carouselScreen" style="display: none; opacity: 0;">
+        
+        <div class="audioControlContainer">
+            <img src="image/volume.svg" alt="Controle de Som" id="volumeIcon">
+            <div class="sliderWrapper">
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.1">
+            </div>
+        </div>
+
+        <h2 class="carouselTitle">Para onde você deseja ir?</h2>
+
+        <div class="scene3D">
+            <div class="cylinder3D">
+                <div class="card3D" style="--cardIndex: 0;">
+                    <div class="cardInner motors" data-title="IGT Motors"
+                        data-desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet metus vitae purus aliquet accumsan."
+                        data-link="https://igtmotors.vercel.app/">IGT Motors</div>
+                </div>
+                <div class="card3D" style="--cardIndex: 1;">
+                    <div class="cardInner home" data-title="IGT Home"
+                        data-desc="Soluções inteligentes para o seu lar com o padrão de qualidade do grupo IGT."
+                        data-link="https://www.igthome.com.br">IGT Home</div>
+                </div>
+                <div class="card3D" style="--cardIndex: 2;">
+                    <div class="cardInner parts" data-title="IGT Parts"
+                        data-desc="Peças e componentes de alta performance projetados para durabilidade extrema."
+                        data-link="https://www.igtparts.com.br">IGT Parts</div>
+                </div>
+                <div class="card3D" style="--cardIndex: 3;">
+                    <div class="cardInner corporate" data-title="IGT Corporate"
+                        data-desc="A força motriz por trás de todas as marcas. Conheça nossa estrutura corporativa."
+                        data-link="https://www.igtcorporate.com.br">IGT Corporate</div>
+                </div>
+                <div class="card3D" style="--cardIndex: 4;">
+                    <div class="cardInner izzy" data-title="Izzy"
+                        data-desc="Inovação e mobilidade urbana pensada para o futuro. Descubra o universo Izzy."
+                        data-link="https://www.izzy.com.br">Izzy</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cardTooltip" style="opacity: 0; display: none;">
+        <h3 class="tooltipTitle">Título</h3>
+        <p class="tooltipDesc">Descrição do card vai aqui.</p>
+    </div>
+
+    <div class="redirectModalOverlay" style="display: none; opacity: 0;">
+        <div class="redirectModal">
+            <button class="closeModalBtn">&times;</button>
+
+            <h3 class="modalBrandTitle">Nome da Marca</h3>
+            <p class="modalBrandDesc">Você quer conhecer a Nome da Marca?</p>
+
+            <a href="#" class="modalRedirectBtn" target="_blank">Acessar o Site</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

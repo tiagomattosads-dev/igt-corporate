@@ -1,0 +1,503 @@
+@font-face {
+    font-family: 'DM Sans';
+    src: url('fonts/DMSans-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Sackers Gothic';
+    src: url('fonts/Sackers-GothicMedium.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #080808;
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+}
+
+/* === PRELOADER & WELCOME === */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #080808;
+    z-index: 9999;
+}
+
+.preloaderContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    width: 80vw; 
+    max-width: 900px; 
+}
+
+.logoWrapper {
+    position: relative;
+    width: 250px;
+    margin-bottom: 110px;
+}
+
+.logoIgt {
+    width: 100%; 
+    
+    /* Impede de selecionar a imagem (a tarja azul) */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    
+    /* Impede de clicar e "arrastar" a imagem como se fosse salvar um arquivo */
+    -webkit-user-drag: none; 
+    
+    /* Faz o mouse simplesmente ignorar o logo, como se ele fosse um holograma */
+    pointer-events: none; 
+}
+
+.mainLogo {
+    position: relative;
+    animation: floatMain 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba(204, 0, 0, 0.6));
+    z-index: 2;
+    margin-bottom: -100px;
+}
+
+.reflectionLogo {
+    position: absolute;
+    bottom: -600px; 
+    left: 0;
+    transform: scaleY(-1); 
+    opacity: 0.15; 
+    filter: blur(8px); 
+    animation: floatReflection 4s ease-in-out infinite;
+}
+
+@keyframes floatMain {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+@keyframes floatReflection {
+    0%, 100% { transform: scaleY(-1) translateY(0); }
+    50% { transform: scaleY(-1) translateY(15px); } 
+}
+
+.loaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    width: 100%;
+    position: relative; 
+    -webkit-box-reflect: below 12px linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.0) 100%);
+}
+
+.percentageText {
+    font-family: 'Sackers Gothic', 'DM Sans', sans-serif; 
+    font-size: 72px; 
+    font-weight: 500;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    
+    /* O texto fica ali visualmente incrível, mas impossível de ser "sublinhado" de azul */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.ticksContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; 
+    align-items: flex-end;
+    height: 60px; 
+}
+
+.tickItem {
+    width: 4px; 
+    height: 40px; 
+    background-color: #dfdfdf; 
+    border-radius: 2px;
+    transform-origin: bottom; 
+    will-change: transform, background-color;
+}
+
+.matteFloor {
+    position: absolute;
+    top: calc(100% + 12px); 
+    left: -10vw; 
+    width: 120vw;
+    height: 150px; 
+    z-index: 3;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    pointer-events: none;
+}
+
+.welcomeScreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #080808;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 50;
+}
+
+.welcomeTitle {
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 42px;
+    font-weight: 400;
+    letter-spacing: -1px;
+    color: #ffffff;
+    
+    /* BLOQUEIO DE SELEÇÃO */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.carouselScreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #080808;
+    overflow: hidden;
+    position: relative;
+    padding-top: 5vh;
+}
+
+.carouselTitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 0px;
+    margin-top: 50px; 
+    color: #ffffff;
+    z-index: 10;
+    
+    /* BLOQUEIO DE SELEÇÃO */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+/* === O NOVO MOTOR 3D PURO === */
+.scene3D {
+    width: 100%;
+    /* 1. ERGUENDO O TETO: Aumentamos para 750px para sobrar espaço de sobra para a flutuação */
+    height: 850px; 
+    perspective: 2500px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    padding-bottom: 50px; 
+    
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.cylinder3D {
+    width: 300px;
+    height: 450px;
+    position: relative;
+    transform-style: preserve-3d;
+    /* Acompanha o novo raio da roleta */
+    transform: translateZ(-320px);
+    will-change: transform;
+}
+
+.card3D {
+    position: absolute;
+    /* 2. ALINHAMENTO DO EIXO: Como a caixa cresceu 60px no total, recuamos 30px para cada lado para o eixo de rotação ficar perfeitamente no centro */
+    top: -30px;
+    left: -30px;
+    width: 360px;
+    height: 510px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transform: rotateY(calc(var(--cardIndex) * 72deg)) translateZ(320px);
+    
+    -webkit-box-reflect: below -45px linear-gradient(to bottom, transparent 60%, rgba(255, 255, 255, 0.3) 100%);
+}
+
+/* O miolo agora ganha suas medidas fixas e reais de volta, ficando centralizado na caixa 3D */
+.cardInner {
+    width: 300px;
+    height: 450px;
+    background: linear-gradient(135deg, #1c1c1c 0%, #0a0a0a 100%); 
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 24px;
+    color: #fff;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    cursor: pointer;
+    animation: cardHover 6s ease-in-out infinite;
+    
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+/* Atraso ímpar para flutuação assimétrica maravilhosa */
+.card3D:nth-child(even) .cardInner {
+    animation-delay: -3s;
+}
+
+@keyframes cardHover {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* === TOOLTIP / MODAL FLUTUANTE === */
+.cardTooltip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    background: rgba(15, 15, 15, 0.85); /* Fundo escuro com leve transparência */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Borda de vidro */
+    border-radius: 8px;
+    padding: 16px;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    z-index: 1000;
+    
+    /* A MÁGICA: Isso impede que o modal "roube" o hover do mouse */
+    pointer-events: none; 
+    
+    /* Desfoque de fundo estilo iOS/Mac */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    will-change: transform, opacity;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.tooltipTitle {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.tooltipDesc {
+    font-size: 12px;
+    color: #a0a0a0; /* Cinza clarinho para dar contraste com o título */
+    line-height: 1.4;
+}
+
+/* === MODAL DE REDIRECIONAMENTO PREMIUM === */
+.redirectModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6); /* Escurece o fundo */
+    backdrop-filter: blur(15px); /* O famoso efeito de vidro que vai embaçar a roleta toda */
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.redirectModal {
+    background: linear-gradient(135deg, rgba(25, 25, 25, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 50px 40px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+    position: relative;
+    font-family: 'DM Sans', sans-serif;
+    /* Bloqueio de seleção de texto para manter o padrão premium */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.closeModalBtn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+
+.closeModalBtn:hover {
+    opacity: 1;
+}
+
+.modalBrandTitle {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.modalBrandDesc {
+    font-size: 16px;
+    color: #a0a0a0;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+.modalRedirectBtn {
+    display: inline-block;
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    padding: 16px 40px;
+    border-radius: 30px;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(255,255,255,0.15);
+}
+
+.modalRedirectBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(255,255,255,0.25);
+    background: #f0f0f0;
+}
+
+/* === CONTROLE DE ÁUDIO E VOLUME EXPANSÍVEL === */
+.audioControlContainer {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    background: rgba(255, 255, 255, 0.02); 
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+    border-radius: 30px; 
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 13px; 
+    z-index: 2000;
+    
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow: hidden;
+    
+    width: 50px; 
+    opacity: 0.4; 
+    cursor: pointer; 
+    
+    /* BLOQUEIO DO CURSOR DE TEXTO DURANTE O ARRASTE */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+/* 1. MOUSE EM CIMA: Apenas acende, sem expandir */
+.audioControlContainer:hover {
+    background: rgba(255, 255, 255, 0.15); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 1; 
+}
+
+/* 2. O CLIQUE (Classe injetada pelo JS): Expande a caixa */
+.audioControlContainer.expanded {
+    /* Ajuste para 190px (50px do ícone + 12px de margem + 120px do slider + 8px de padding) */
+    width: 190px; 
+    background: rgba(255, 255, 255, 0.15); 
+    opacity: 1; 
+}
+
+.audioControlContainer img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.9;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+    flex-shrink: 0;
+    filter: invert(1) brightness(100); 
+}
+
+.sliderWrapper {
+    margin-left: 12px;
+    width: 120px; 
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    height: 24px; 
+    pointer-events: none;
+}
+
+/* 3. Revela a barrinha apenas quando a caixa recebe a classe .expanded */
+.audioControlContainer.expanded .sliderWrapper {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.1s; 
+    pointer-events: auto; /* Libera o mouse para interagir */
+}
+
+/* Estilizando a barrinha (Range) com visual clean */
+#volumeSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%; 
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    margin: 0; 
+}
+
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+}
+
+#volumeSlider::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
